@@ -11,12 +11,16 @@ MAIN_MENU = object()
 
 
 def safe_input(prompt):
-    """带导航提示的输入函数：输入 0 返回主菜单，输入 b 返回上一步"""
+    """带导航提示的输入函数：输入 0 返回主菜单，输入 b 返回上一步，输入 \\0 或 \\b 输入字面值"""
     user_input = input(f"{prompt} (0:主菜单, b:上一步): ").strip()
     if user_input == "0":
         return MAIN_MENU
     if user_input.lower() == "b":
         return BACK
+    if user_input == "\\0":
+        return "0"
+    if user_input == "\\b":
+        return "b"
     return user_input
 
 
@@ -469,7 +473,7 @@ def recycle_bin_menu():
         print("  0. 返回主菜单")
         choice = safe_input("请选择: ")
 
-        if choice == MAIN_MENU or choice == BACK or choice == "0":
+        if choice == MAIN_MENU or choice == BACK:
             break
         elif choice == "1":
             list_recycle_bin()
@@ -643,7 +647,7 @@ def main():
         print(" 11. 切换工作目录")
         print("  0. 退出")
         print("-" * 40)
-        print("提示：在任何输入界面输入 0 返回主菜单，输入 b 返回上一步")
+        print("提示：在任何输入界面输入 0 返回主菜单，输入 b 返回上一步，输入 \\0 或 \\b 输入字面值")
         choice = input("请选择: ").strip()
 
         try:
